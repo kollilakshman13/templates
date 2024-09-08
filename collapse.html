@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .hidden-row {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<table border="1">
+    <tr>
+        <th>Item</th>
+        <th>Details</th>
+        <th>Expand</th>
+    </tr>
+    <tr>
+        <td>Item 1</td>
+        <td>Some details about item 1</td>
+        <td><button onclick="toggleRow(this)">^</button></td>
+    </tr>
+    <tr class="hidden-row">
+        <td colspan="3">Additional information about item 1</td>
+    </tr>
+    <tr>
+        <td>Item 2</td>
+        <td>Some details about item 2</td>
+        <td><button onclick="toggleRow(this)">^</button></td>
+    </tr>
+    <tr class="hidden-row">
+        <td colspan="3">Additional information about item 2</td>
+    </tr>
+</table>
+
+<script>
+function toggleRow(button) {
+    // Get the next sibling of the parent row
+    var row = button.parentNode.parentNode.nextElementSibling;
+
+    // Check if the next sibling is a hidden row
+    if (row && row.classList.contains('hidden-row')) {
+        // Get current display status of the row
+        var isRowVisible = row.style.display === 'table-row';
+
+        // Collapse all hidden rows
+        var allHiddenRows = document.querySelectorAll('.hidden-row');
+        allHiddenRows.forEach(function(r) {
+            r.style.display = 'none';
+        });
+
+        // Toggle the target row visibility based on its current state
+        if (!isRowVisible) {
+            row.style.display = 'table-row';
+        }
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>offer letter</title>
+    <link rel="stylesheet" href="offerletter.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="contain-page">
+        <div class="box1">
+            <p>64 Network Security Private Limited</p>
+            <p>----------------------------------------------------------------------------------------------------------------------------------</p>
+            <p>Offer Letter</p>
+        </div>
+        
+        <p>Dear {{ applicant_name }},</p>
+        <p>We are pleased to offer you the position of {{ designation }} at {{ company }} with a start date of {{ frappe.utils.formatdate(offer_date, "dd-MM-yyyy") }}. We believe your skills are good enough to match for our company.</p><br>
+        <div class="box2">
+            <p>In this role, you will be required to do the following:</p>
+            <p>-Promoting the products and solutions</p>
+            <p>-Customer follow-up</p>
+            <p>-Should be able to explain the customers about our products and its benefits and personally meet them whenever in need</p>
+            <p>-Meet sales targets</p>
+            <p>-Should be a team player in achieving sales targets</p>
+            <p>-Receiving feedback through emails/phones and improve customer relationship</p>
+            <p>-Brand promotion</p>
+            <p>-Responsible for complete sales life cycle</p>
+            <p>-Should be able to lead a team whenever in need</p><br>
+        </div>
+        <p>Your employment with {{ company }} will be on an at-will basis, which means you and the company are free to terminate the employment relationship at any time for any reason. This letter is not a contract or guarantee of employment for a definite amount of time.First 3 months are probationary period, to prove your performance where you are not entitled to get any leaves and advantages of non-probationary employee. In case you apply for a leave it will be considered as LOSS OF PAY.</p><br>
+
+        <p>{%- for row in doc.offer_terms -%}</p><br>
+        <p>{% if row.offer_term == "Date of Joining" -%}<br>
+        You can confirm your acceptance of this offer letter by signing and returning it on or before {{ row.value }}. {%- endif %}{% if row.offer_term == "Offer Letter Expiry Date" -%}Failure in submitting this offer letter by {{ row.value }} will make it as null and void.
+        </p>
+        <p>We are excited to have you join our team! If you have any questions, please feel free to reach out at any time.<br>
+         {%- endif %}<br>
+        {% if row.offer_term == "Annual Salary" -%}</p>
+        <p style="text-align: center;font-weight: bold;"><u>SALARY BREAKUP OF {{ applicant_name }}</u></p>
+        <p><b>You are entitled to a package of {{ row.value}} per annum, which is divided in to fixed and variable salary. Read the details given below carefully.</b></p><br>
+        <table class="table table-bordered" >
+            <tr style="text-align: center;">
+                <th>Total Salary Per Annum</th>
+                <th>Fixed Salary Per Annum</th>
+                <th>Variable Salary</th>
+                <th></th>
+            </tr>
+            <tr style="text-align: center;">
+                <td> {{ row.value}}</td>
+                <td>{{ row.value }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table><br><br>
+        <p style="font-weight: bold;">You are entitled to claim to Variable Salary after 80% of annual targets  achieved. INCENTIVES AND APPRAISALS WILL BE ANNOUNCED AND PROVIDED AT THE END OF FIRST QUARETR OF THE FOLLOWING SALES YEAR (JULY 2024).<br>
+            {{ (row.value |int) /12}}
+        </p>
+        <br><br><br>
+        <p style="text-align: center;font-weight: bold;"><u>Monthly CTC of Mr. {{ applicant_name }}</u></p>
+        <p><b>Total Salary- Rs {{ (row.value |int)/12 | int }}</b> </p>
+        <table class="table table-bordered" >
+            <tr style="text-align: center;">
+                <th>Earnings </th>
+                <th>Amount</th>
+                <th>Deduction</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td>Basic</td>
+                <td style="text-align: right;font-weight: bold;">Rs {{ (row.value |int)* 0.4/12 | int }} </td>
+                <td>Provident Fund</td>
+                <td style="text-align: right;font-weight: bold;">{%if row.value|int*0.4/12|float ==15000 %}{{ row.value|int*0.008 }}{% endif %}</td>
+            </tr>
+            <tr>
+                <td>Medical Allowance</td>
+                <td style="text-align: right;font-weight: bold;">Rs 1,250</td>
+                <td>Employer Contribution-Capped to 1800</td>
+                <td style="text-align: right;font-weight: bold;">Rs {{ (row.value |int)/75 }} </td>
+            </tr>
+            <tr>
+                <td>Conveyance Allowance</td>
+                <td style="text-align: right;font-weight: bold;">Rs 1,600</td>
+                <td>Employee Contribution-Capped to 1800</td>
+                <td style="text-align: right;font-weight: bold;">Rs {{ (row.value |int)/75 }} </td>
+            </tr>
+            <tr>
+                <td>House Rent Allowance (HRA)</td>
+                <td style="text-align: right;font-weight: bold;">Rs {{ (row.value |int)/75 }} </td>
+                <td>ESIC</td>
+                <td style="text-align: right;font-weight: bold;"></td>
+            </tr>
+            <tr>
+                <td>Variable Allowance</td>
+                <td style="text-align: right;font-weight: bold;">Rs {{ ((row.value |int)/12) -( ((row.value |int)* 0.4/12) +((row.value |int)/75) +1250 +1600) }}</td>
+                <td>Professional Tax</td>
+                <td style="text-align: right;font-weight: bold;"></td>
+            </tr>
+            
+            <tr style="font-weight: bold;">
+                <td>Total (Before Deductions)</td>
+                <td style="text-align: right;">Rs {{ (row.value |int)/12 | int }} </td>
+                <td>Total Deductions</td>
+                <td style="text-align: right;"></td>
+            </tr>
+            
+        </table><br>
+        <p><b>Total payable salary: - Rs. 41,200/-</b></p>
+        <p><b>Total payable salary in words: - _Forty One Thousand Two Hundred Rupees Only.</b></p>
+        <br><br>
+        <p><b>Signature: ______________________________</b></p>
+        <p><b>Accepted by Mr/Ms. ______________________</b></p>
+        <p><b>Date: </b></p>
+        <br><br><br>
+        <p style="text-align: center;"><b>REQUIRED DOCUMENTS</b></p>
+        <p><b>The employee is needed to submit the soft copies of the following documents on the day of joining.</b></p>
+        <p><b>1.ID proof (AADHAR/ VOTER)<br>
+            2.Driving License<br>
+            3.3 Recent colour passport photos<br>
+            4.Pan Card<br>
+            5.SSC final certificate<br>
+            6.Graduation or Post-graduation certificate<br>
+            7.Relieving letter of the previous company<br>
+            8.Bank account details<br>
+            9.Reference number of your previous HR or HOD along with Pay slip of last drawn salary<br>
+            I hereby accept the terms and conditions set by the company and I pledge that I’ll follow the set of rules and regulations and try to perform according to the company policies.</b></p>
+            <br>
+            <p><b>Signature: ______________________________<br>
+                Accepted by __________________________</b>
+            </p><br>
+            <p><b>Date: </b></p><br>
+            <p>{%- endif %}</p>
+            <p>{% endfor %}</p>
+
+
+
+
+
+        
+    </div>
+</body>
+</html>

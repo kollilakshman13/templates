@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <style>
+        .contain {
+            width:100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Combines adjacent borders into a single border */
+        }
+
+        td {
+            border: 1px solid black; /* Border around cells */
+            text-align: left; /* Align text to the left */
+            vertical-align: top; /* Align content to the top of the cell */
+            color: #333333; /* Text color */
+        }
+        th {
+            border:1px solid black;
+            text-align: center;
+            color:black;
+            font-weight: 800;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <table style="width:98%;border:2px solid black;">
+            <tr>
+                <td style="width: 80%;border:none;" colspan="3">
+                    <table>
+                        <tr>
+                            <td colspan="2" style="border:none;"><h2>VAARAAHI CAPITALS PVT LTD</h2></td>
+                        </tr>
+                        <tr>
+                            <td style="width:60%;border:none;">5th Floor, 8-3-318/11/3, Kolluri House Plot No 3, Jaya Prakash Nagar, Yella Reddy Guda, Hyderabad, Telangana State Code:36, Postal Code:500073, India GSTIN:36AAICV6094N1ZH</td>
+                            <td style="width:40%;border:none;"><p> Tel: 7995646464 <br>
+                                    web: <br>
+                                    Email:
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="text-align:right;border:none;" >
+                    <img src="/images/vaaraahi Screenshot (black).jpg" style="width:100px;height:100px;">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="border:1px solid black;text-align: center;">Quotation</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right:none">Customer Details</td>
+                <td style="border:none;border-left:1px solid black;">Quotation No</td>
+                <td style="border:none;">Number</td>
+            </tr>
+            <tr>
+                <td style="border:none;width:20%">Bill To</td>
+                <td style="border:none;width:30%">Brane Enterprises Private Limited</td>
+                <td style="border:none;border-left:1px solid black;width:20%">Quotation Date</td>
+                <td style="border:none;width:30%">29-08-2024</td>
+            </tr>
+            <tr>
+                <td style="border:none;">Address</td>
+                <td style="border:none;">1-12/13 anna nagar
+                    Chennai
+                    Tamil Nadu, State Code: 33
+                    India</td>
+                <td style="border:none;border-left:1px solid black;">Shipping address</td>
+                <td style="border:none;">1-12/13 anna nagar
+                    Chennai
+                    Tamil Nadu, State Code: 33
+                    India</td>
+            </tr>
+            <tr>
+                <td style="border:none;">GSTIN</td>
+                <td style="border:none;">None</td>
+                <td style="border:none;border-left:1px solid black;">Phone Number</td>
+                <td style="border:none;">9848339610</td>
+            </tr>
+            <tr>
+                <td style="border:none;">Place of Supply</td>
+                <td style="border:none;">33-Tamil Nadu</td>
+                <td style="border:none;border-left:1px solid black;">Contact Person</td>
+                <td style="border:none;">Mr Sekhar P</td>
+            </tr>
+            
+        </table>
+        <table style="width:98%;border:2px solid black;">
+            <tr>
+                <th>SNo</th>
+                <th>Name of Product/Service</th>
+                <th >HSN/SAC</th>
+                <th >Qty</th>
+                <th >Rate</th>
+                <th >Amount</th>
+                <th>Tax<br>(%)</th>
+                <th>Total</th>
+            </tr>
+            {% for row in doc.items %}
+            <tr >
+                <td >{{row.idx}}</td>
+                <td >{{row.item_name}}<br>Description:<br>{{row.description}}</td>
+                <td style="text-align:center;">{{row.gst_hsn_code}}</td>
+                <td style="text-align:center;">{{row.get_value("qty")}}<br>{{row.get_value("uom")}}</td>
+                <td style="text-align:center;">{{row.get_value("rate")}}</td>
+                <td style="text-align:right;">{{row.get_value("amount")}}</td>
+                <td >
+                   
+                    {% if row.item_tax_template %}
+                        {% set tax_doc = frappe.get_doc("Item Tax Template", row.item_tax_template) %}
+                        {% if tax_doc %}
+                            {% for r in tax_doc.taxes %}
+                                {% set customer_doc = frappe.get_doc("Address", row.customer_address) %}
+                                {% set company_doc = frappe.get_doc("Address", row.company_address) %}
+                                {% if customer_doc.state == company_doc.state %}
+                                    {% if r.tax_type == "Output Tax SGST - 6NSPL" %}
+                                    {% elif r.tax_type == "Output Tax CGST - 6NSPL" %}
+                                        {% set total=r.tax_rate +r.tax_rate %}
+                                           {{total}}
+                                    {% endif %} 
+                                {% else%}
+                                    {% if customer_doc.state != company_doc.state %}
+                                        {% if r.tax_type == "Output Tax IGST - 6NSPL" %}
+                                               {{r.tax_rate}}
+                                             
+                                        {% endif %} 
+                                    {% endif%} 
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {%else%}
+                      {{18.0}}     
+                    {% endif %}
+                </td>
+               
+                <td style="text-align:right;">
+                     
+                    {% if row.item_tax_template %}
+                        {% set tax_doc = frappe.get_doc("Item Tax Template", row.item_tax_template) %}
+                        {% if tax_doc %}
+                            {% for r in tax_doc.taxes %}
+                                {% set customer_doc = frappe.get_doc("Address", row.customer_address) %}
+                                {% set company_doc = frappe.get_doc("Address", row.company_address) %}
+                                {% if customer_doc.state == company_doc.state %}
+                                    {% if r.tax_type == "Output Tax SGST - 6NSPL" %}
+                                    {% elif r.tax_type == "Output Tax CGST - 6NSPL" %}
+                                        {% set total=r.tax_rate +r.tax_rate %}
+                                           {% set t=total*row.amount/100 %}
+                                           {{t+row.amount}}
+                                    {% endif %} 
+                                {% else%}
+                                    {% if customer_doc.state != company_doc.state %}
+                                        {% if r.tax_type == "Output Tax IGST - 6NSPL" %}
+                                               {% set t=r.tax_rate*row.amount/100 %}
+                                               {{t+row.amount}}
+                                        {% endif %} 
+                                    {% endif%}    
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {%else%}
+                       {% set total = 18*row.amount/100%}
+                       {{total+row.amount}}
+                    {% endif %}
+                </td>
+                    
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" style="text-align:right;">Total</td>
+                <td style="text-align:center;">{{doc.get_value("total_qty")}}</td>
+                <td colspan="2" style="text-align:right;">{{doc.get_formatted("total")}}</td>
+                <td colspan="2" style="text-align:right">{{doc.get_formatted("rounded_total")}}</td>
+            </tr> 
+        </table>
+        <table style="width:98%;border:2px solid black;">
+            <tr style="padding:0;">
+                <td style="padding:0;width:80%;">
+                    <table>
+                        <tr>
+                            <td style="text-align: center;"><b>Terms and Conditions</b></td>
+                        </tr>
+                        <tr>
+                           <td>
+                            {{doc.terms}}
+                           </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                {%for row in doc.sales_team_details %}
+                                    <p><b>Sales Person:</b>{{row.sales_person}}</p>
+                                    <p style="line-height: 15px;"><b>Phone No:</b>{{row.contact_no}}</p>
+                                    <p style="line-height: 15px;"><b>Email ID:</b>{{row.email}}</p>
+                                {%endfor%}
+                            </td>
+                         </tr>
+                   </table>
+                </td>
+                <td style="padding: 0;width:20%;">
+                    <table>
+                        <tr>
+                            <td>
+                                <p style="font-size: 10px;text-align:center;"><b>Certified that the particulars given above are true and correct.</b></p>
+                                <p><b>For VAARAAHI CAPITAL PVT LTD</b></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p style="text-align:center;">This is Computer Generated</p>
+                                <p style="text-align: center;line-height: 10px;">invoice no signature required</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-bottom:1px;text-align:center;font-weight: bold;">Authorised Signatory</td>
+                        </tr>
+                       
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+</body>
+</html>

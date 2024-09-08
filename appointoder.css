@@ -1,0 +1,22 @@
+
+  
+.container {
+    width: 180mm;
+    min-height: 297mm;
+    margin: 10mm 5mm;
+    font-size:14px;
+    font-family: 'Roboto',sans-serif;
+
+}
+.box1 {
+    width:300px;
+}
+.box2 {
+    margin-left:15px;
+}
+.box21 {
+    margin-left:15px;
+}
+.tar {
+    text-align: right;
+}

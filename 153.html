@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table with Wrapping Long Data and Page Breaks</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse; /* Collapses borders for a cleaner look */
+            border: 1px solid black; /* Ensures a single border thickness */
+        }
+        th, td {
+            border: 1px solid black; /* Adds borders to cells */
+            padding: 0px;
+            max-width: 200px; /* Sets a maximum width for cells */
+            word-wrap: break-word; /* Wraps long words to the next line */
+            word-break: break-word; /* Breaks words at appropriate points */
+            white-space: normal; /* Allows text to wrap naturally */
+            page-break-inside: avoid; /* Prevents page breaks inside table cells */
+        }
+        tr {
+            page-break-inside: avoid; /* Prevents page breaks inside table rows */
+        }
+        
+    </style>
+
+</head>
+<body>
+    <table>
+        <tr>
+            <th style="width:20%">Header 1</th>
+            <th style="width:40%">Header 2</th>
+            <th style="width:40%">Header 3</th>
+        </tr>
+        <tr>
+            <td>Short text</td>
+            <td>Very long text that needs to be wrapped and should display completely within the cell, breaking sentences and wrapping onto new lines as needed to fit within the cell boundaries. This ensures all content is visible and readable within the cell, providing a better user experience.</td>
+            <td>Another example of long text that will be wrapped properly within the cell to ensure all content is visible without causing layout issues or hidden content.</td>
+        </tr>
+        <tr>
+            <td>Short text</td>
+            <td>Very long text that needs to be wrapped and should display completely within the cell, breaking sentences and wrapping onto new lines as needed to fit within the cell boundaries. This ensures all content is visible and readable within the cell, providing a better user experience.</td>
+            <td>Another example of long text that will be wrapped properly within the cell to ensure all content is visible without causing layout issues or hidden content.</td>
+        </tr>
+        <tr>
+            <td>Short text</td>
+            <td>Very long text that needs to be wrapped and should display completely within the cell, breaking sentences and wrapping onto new lines as needed to fit within the cell boundaries. This ensures all content is visible and readable within the cell, providing a better user experience.</td>
+            <td>Another example of long text that will be wrapped properly within the cell to ensure all content is visible without causing layout issues or hidden content.</td>
+        </tr>
+        <tr>
+            <td>Short text</td>
+            <td>Very long text that needs to be wrapped and should display completely within the cell, breaking sentences and wrapping onto new lines as needed to fit within the cell boundaries. This ensures all content is visible and readable within the cell, providing a better user experience.</td>
+            <td>Another example of long text that will be wrapped properly within the cell to ensure all content is visible without causing layout issues or hidden content.</td>
+        </tr>
+        <tr>
+            <td>Short text</td>
+            <td>Very long text that needs to be wrapped and should display completely within the cell, breaking sentences and wrapping onto new lines as needed to fit within the cell boundaries. This ensures all content is visible and readable within the cell, providing a better user experience.</td>
+            <td>Another example of long text that will be wrapped properly within the cell to ensure all content is visible without causing layout issues or hidden content.</td>
+        </tr>
+        <tr row-span="2">
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>1</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td rowspan="2" colspan="2">Rowspan=2 Colspan=2</td>
+            <td>Cell 3</td>
+            <td>Cell 4</td>
+        </tr>
+        <tr>
+            <td>Cell 5</td>
+            <td>Cell 6</td>
+        </tr>
+        <tr>
+            <td>Cell 7</td>
+            <td>Cell 8</td>
+            <td>Cell 9</td>
+            <td>Cell 10</td>
+        </tr>
+    </table>
+    <!--<table>
+        <tr>
+            <td style="column-span: 2;">1</td>
+            <td style="column-span: 2;">1</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+    </table>
+    <table>
+        <thead>
+            <tr>
+                <td colspan="2">Header 1</td>
+                <td colspan="2">Header 2</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+            </tr>
+            
+        </tbody>
+    </table>-->
+
+    <br>
+    <table>
+        <tr>
+            <td colspan="3" style="border: none;">
+                <table style="border: none;">
+                    <tr>
+                        <td colspan="2" style="border: none;">64network</td>
+                    </tr>
+                    <tr style="border: none;">
+                        <td style="border: none;">address</td>
+                        <td style="border: none;">phone</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="border: none;">image</td>
+        </tr>
+        <tr>
+            <td colspan="4">quotation</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table style="border: none;">
+                    <tr>
+                        <td colspan="2" style="border: none; border-bottom: 1px solid black;">customer</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">address:</td>
+                        <td style="border: none;">hyderabad</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">gst</td>
+                        <td style="border: none;">258</td>
+                    </tr>
+                </table>
+            </td>
+            <td colspan="2">
+                <table style="border: none; margin-top: -10px;">
+                    <tr>
+                        <td style="border: none;">quotation id</td>
+                        <td style="border: none;">125478</td>
+                    </tr>
+                    <tr>
+                        <td style="border: none;">quotation date</td>
+                        <td style="border: none;">15-05-2023</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="border: none;">
+                <table style="border: none;">
+                    <tr style="border: none;">
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="width: 60%;">1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td colspan="3">terms</td>
+            <td >sd</td>
+        </tr>
+        <tr>
+            <td colspan="3">sales</td>
+            <td>sign</td>
+        </tr>
+    </table>
+    
+</body>
+</html>

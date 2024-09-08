@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+</head>
+<body>
+    <h1>Job Details</h1>
+    <div id="jobDetails">
+        <!-- Job details will be populated here -->
+    </div>
+
+    <script>
+        // Example job data
+        const jobs = [
+            { id: 1, title: 'Software Engineer', description: 'Develop and maintain software applications.' },
+            { id: 2, title: 'Product Manager', description: 'Oversee the development and lifecycle of products.' },
+            { id: 3, title: 'Data Analyst', description: 'Analyze data to help make informed business decisions.' }
+        ];
+
+        // Function to get job details by ID
+        function getJobDetails(jobId) {
+            return jobs.find(job => job.id === jobId);
+        }
+
+        // Function to display job details
+        function displayJobDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobId = parseInt(urlParams.get('id'));
+            const job = getJobDetails(jobId);
+
+            if (job) {
+                const jobDetailsContainer = document.getElementById('jobDetails');
+                jobDetailsContainer.innerHTML = `
+                    <h2>${job.title}</h2>
+                    <p>${job.description}</p>
+                    <a href="pay.html">Go to Pay Details</a>
+                `;
+            } else {
+                document.getElementById('jobDetails').innerHTML = '<p>Job not found.</p>';
+            }
+        }
+
+        // Display job details when the page loads
+        window.onload = displayJobDetails;
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+
+
+.contain-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 10mm auto;
+    font-size:14px;
+    font-family: 'Roboto',sans-serif;
+
+}
+.box1 {
+    line-height: 17px;
+    
+}
+
+.box11 {
+    margin-top: 25px;
+    margin-left:15px;
+
+}
+.box2 {
+    width:100%;
+    margin-top: 5px;
+}
+.box3 {
+    font-weight: bold;
+    width:100%;
+}
+.box5 {
+    margin-left: -25px;
+}
+
+.box4 {
+    border: 1px solid white;
+    width:100%;
+    margin-top: 15px;
+    border-bottom: none;
+    border-top: none; 
+   
+   
+    
+
+}
+.box4 .row {
+    margin-bottom:-10px;
+    
+}
+
+    
+

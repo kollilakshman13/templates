@@ -1,0 +1,22 @@
+
+body {
+    width:100%;
+    margin:auto;
+    font-size: 12px;
+    font-family:  'Asap', sans-serif;;
+}
+.contain-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 10mm auto;
+    padding: 2px 2px;
+    font-size: 12px;
+}
+.box1 {
+    text-align: center;
+    font-weight: bold;
+    margin-top:5px;
+}
+.box2 {
+    line-height: 5px;
+}
